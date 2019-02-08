@@ -2,9 +2,13 @@
 
 <launch>
 
-    <include file="$(find tbotnav)/launch/tbot_routine_rviz.launch"/>
-    <include file="$(find tbotnav)/launch/asus_cam.launch"/>
-    <node name="get_hand_gestures" pkg="tbotnav" type="get_hand_gestures.py" />    
+    <!-- <include file="$(find tbotnav)/launch/tbot_routine_rviz.launch"/> -->
+    <!-- <include file="$(find tbotnav)/launch/asus_cam.launch"/> -->
+
+    <include file="$(find realsense2_camera)/launch/rs_rgbd.launch" />
+    <node name="get_hand_gestures" pkg="tbotnav" type="get_hand_gestures.py" >
+        <param name="~image_raw_topic" value="/camera/depth/image_rect_raw"/>
+    </node>    
     
 
 </launch>

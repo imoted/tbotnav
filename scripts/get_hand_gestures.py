@@ -23,8 +23,9 @@ class HandGestures:
 
         self.bridge = CvBridge()
         self.numFingers = RecognizeNumFingers() 
+        image_raw_topic = rospy.get_param("~image_raw_topic", default="/camera/depth/image_rect_raw")
 
-        self.depth_sub = rospy.Subscriber("/asus/depth/image_raw", Image, self.depth_callback)
+        self.depth_sub = rospy.Subscriber(image_raw_topic, Image, self.depth_callback)
         self.num_pub = rospy.Publisher('num_fingers', Int32, queue_size=10, latch=True)       
         # self.img_pub = rospy.Publisher('hand_img', Image, queue_size=10)
         rospy.loginfo("Waiting for image topics...")        
